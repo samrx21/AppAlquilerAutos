@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alquiler de autos</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="Estilos/css/all.min.css" rel="stylesheet" />
+    <!-- Select2 -->
+    <link href="Estilos/select2.min.css" rel="stylesheet" />
+    <link href="Estilos/select2-bootstrap4.min.css" rel="stylesheet" />
+    <!-- daterange picker -->
+    <link href="Estilos/daterangepicker.css" rel="stylesheet" />
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link href="Estilos/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <!-- Tablas -->
+    <link href="Estilos/dataTables.min.css" rel="stylesheet" />
+    <link href="Estilos/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="Estilos/adminlte.min.css" rel="stylesheet" />
+</head>
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12" id="dvMenu">
+                </div>
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Reserva de auto</h3>
+                        </div>
+                        <form id="frmIncapacidades">
+                            <div class="card-body">
+                                <div class="card card-gray-dark">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Lugar y Fecha de Reservar</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="cboUbicaciones">Lugar de Recogida y Devolucion</label>
+                                                    <select class="form-control" id="cboUbicaciones"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>Fecha y hora Recogida</label>
+                                                    <div class="input-group date" id="dthFechaHoraRec" data-target-input="nearest">
+                                                        <input type="text" class="form-control datetimepicker-input" data-target="#dthFechaHoraRec" />
+                                                        <div class="input-group-append" data-target="#dthFechaHoraRec" data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>Fecha y hora Devolucion</label>
+                                                    <div class="input-group date" id="dthFechaHoraDev" data-target-input="nearest">
+                                                        <input type="text" class="form-control datetimepicker-input" data-target="#dthFechaHoraDev" />
+                                                        <div class="input-group-append" data-target="#dthFechaHoraDev" data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="txtFechaReserva">Fecha que se reservo</label>
+                                                    <input type="text" class="form-control" id="txtFechaReserva" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="txtCodReserva">Codigo de la reserva</label>
+                                                    <input type="text" class="form-control" id="txtCodReserva" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-green">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Escoger auto y seguro</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="cboCategoriaAuto">Categoria</label>
+                                                    <select class="form-control" id="cboCategoriaAuto"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label></label>
+                                                    <button type="button" id="btnMostrarAutos" class="btn-block btn-lg btn-success">Buscar autos</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <table id="tblAutos" class="table table-bordered table-striped" style="width:100%" ;>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Placa</th>
+                                                            <th>Marca</th>
+                                                            <th>Modelo </th>
+                                                            <th>Año </th>
+                                                            <th>Tarifa por dia</th>
+                                                            <th>Categoria</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="txtAutoEscogido">Vehiculo</label>
+                                                    <input type="text" class="form-control" id="txtAutoEscogido" placeholder="Placa del vehiculo deseado" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="cboSeguro">Seguro</label>
+                                                    <select class="form-control" id="cboSeguro"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-gray-dark">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Datos del cliente</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="txtCedula">Cedula</label>
+                                                    <input type="number" class="form-control" id="txtCedula" placeholder="ingrese cedula" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="txtNombre">Nombre</label>
+                                                    <input type="text" class="form-control" id="txtNombre" placeholder="Ingrese Nombre">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="txtApellido">Apellido</label>
+                                                    <input type="text" class="form-control" id="txtApellido" placeholder="Ingrese Apellido">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="txtDireccion">Direccion</label>
+                                                    <input type="text" class="form-control" id="txtDireccion" placeholder="Ingrese Direccion">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="txtTelefono">Telefono</label>
+                                                    <input type="tel" class="form-control" id="txtTelefono" placeholder="INPUT TELÉFONO">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="txtEmail">Email</label>
+                                                    <input type="email" class="form-control" id="txtEmail" placeholder="Input para email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-danger">
+                                    <div class="card-header">
+                                        <h3 class="card-title">PROCESO</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <br />
+                                                <button type="button" id="btnInsertar" class="btn-block btn-lg btn-primary">INSERTAR</button>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <br />
+                                                <button type="button" id="btnActualizar" class="btn-block btn-lg btn-primary">ACTUALIZAR</button>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <br />
+                                                <button type="button" id="btnEliminar" class="btn-block btn-lg btn-primary">ELIMINAR</button>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <br />
+                                                <button type="button" id="btnConsultar" class="btn-block btn-lg btn-primary">LIMPIAR</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-green">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Costo</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="txtAlquiler">Costo del alquiler</label>
+                                                    <input type="text" class="form-control" id="txtAlquiler" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table id="tblReserva" class="table table-bordered table-striped" style="width:100%" ;>
+                                            <thead>
+                                                <tr>
+                                                    <th>ReservaID</th>
+                                                    <th>ClienteID</th>
+                                                    <th>PlacaVeh </th>
+                                                    <th>LugarEntrega_Devolucion </th>
+                                                    <th>SeguroID</th>
+                                                    <th>FechaReserva</th>
+                                                    <th>FechaInicio</th>
+                                                    <th>FechaFinalizacion</th>
+                                                    <th>CostoTotal</th>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div id="dvMensaje" class=""></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="../Scripts/jquery-3.4.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <script src="../Scripts/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="../Scripts/select2.min.js"></script>
+    <!-- InputMask -->
+    <script src="../Scripts/moment.min.js"></script>
+    <script src="../Scripts/jquery.inputmask.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="../Scripts/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="../Scripts/tempusdominus-bootstrap-4.min.js"></script>
+    <!--Tablas-->
+    <script src="../Scripts/jquery.dataTables.min.js"></script>
+    <script src="../Scripts/dataTables.bootstrap4.min.js"></script>
+    <!--Archivos comunes-->
+    <script src="Scripts/Comunes/Tablas.js"></script>
+    <script src="Scripts/Comunes/Combos.js"></script>
+    <!-- Home -->
+    <script src="Scripts/Home.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../Scripts/adminlte.js"></script>
+
+
+
+
+</body>
+</html>
